@@ -124,13 +124,13 @@ namespace Topebox.Tankwars
             switch (direction)
             {
                 case Constants.Direction.UP:
-                    return new Vector3(0, 0, 0);
-                case Constants.Direction.LEFT:
-                    return new Vector3(0, 0, 90);
-                case Constants.Direction.DOWN:
                     return new Vector3(0, 0, 180);
-                case Constants.Direction.RIGHT:
+                case Constants.Direction.LEFT:
                     return new Vector3(0, 0, 270);
+                case Constants.Direction.DOWN:
+                    return new Vector3(0, 0, 0);
+                case Constants.Direction.RIGHT:
+                    return new Vector3(0, 0, 90);
             }
 
             return Vector3.zero;
@@ -227,12 +227,13 @@ namespace Topebox.Tankwars
 
         private void GenerateMap()
         {
-            //generate random map
-            for (int i = 0; i < Config.WallCount; i++)
+            //generate random symmetric wall
+            for (int i = 0; i < Config.WallCount/2; i++)
             {
-                var x = Random.Range(0, Config.MapWidth);
+                var x = Random.Range(0, Config.MapWidth/2);
                 var y = Random.Range(0, Config.MapHeight);
                 logicMap[x, y] = Constants.CellType.WALL;
+                logicMap[Config.MapWidth - x - 1, y] = Constants.CellType.WALL;
             }
 
             for (int x = 0; x < Config.MapWidth; x++)

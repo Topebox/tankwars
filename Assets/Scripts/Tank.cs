@@ -23,11 +23,9 @@ namespace Topebox.Tankwars
             {
                 case Constants.TankType.RED:
                     SpriteRenderer.sprite = RedSprite;
-                    SpriteRenderer.color = Color.red;
                     break;
                 case Constants.TankType.BLUE:
                     SpriteRenderer.sprite = BlueSprite;
-                    SpriteRenderer.color = Color.blue;
                     break;
             }
         }
