@@ -38,6 +38,29 @@ namespace Topebox.Tankwars
                 Debug.LogError("IsMoving:" + CanMove + " IsGameOver:" + IsGameOver);
                 return;
             }
+            
+            
+            var winPlayer = CheckGameOver();
+            if (winPlayer != Constants.GameResult.PLAYING)
+            {
+                IsGameOver = true;
+                Debug.LogError($" IsGameOver {IsGameOver} Result {winPlayer}");
+                switch (winPlayer)
+                {
+                    case Constants.GameResult.PLAYER1_WIN:
+                        TextScore.text = "Game Over Player 1 Win";
+                        break;
+                    case Constants.GameResult.PLAYER2_WIN:
+                        TextScore.text = "Game Over Player 2 Win";
+                        break;
+                    case Constants.GameResult.DRAW:
+                        TextScore.text = "Game Over Draw";
+                        break;
+                }
+                
+                //Export Orginal Map and Moves of players and winner
+                return;
+            }
 
             if (player1Tank.PlayerId == CurrentPlayer)
             {
@@ -70,26 +93,6 @@ namespace Topebox.Tankwars
                 CurrentPlayer = player1Tank.PlayerId;
             }
 
-            var winPlayer = CheckGameOver();
-            if (winPlayer != Constants.GameResult.PLAYING)
-            {
-                IsGameOver = true;
-                Debug.LogError($" IsGameOver {IsGameOver} Result {winPlayer}");
-                switch (winPlayer)
-                {
-                    case Constants.GameResult.PLAYER1_WIN:
-                        TextScore.text = "Game Over Player 1 Win";
-                        break;
-                    case Constants.GameResult.PLAYER2_WIN:
-                        TextScore.text = "Game Over Player 2 Win";
-                        break;
-                    case Constants.GameResult.DRAW:
-                        TextScore.text = "Game Over Draw";
-                        break;
-                }
-                
-                //Export Orginal Map and Moves of players and winner
-            }
         }
 
         private Constants.GameResult CheckGameOver()
