@@ -188,8 +188,11 @@ namespace Topebox.Tankwars
             GenerateMap();
             UpdateMap();
             player1Tank = CreateTank(Player1Position, Config.Player1Type, 1);
+            player1Tank.transform.DORotate(GetRotateByDirection(Constants.Direction.DOWN), 0.1f);
             OccupyPosition(Player1Position, player1Tank.CurrentTank);
+            
             player2Tank = CreateTank(Player2Position, Config.Player2Type, 2);
+            player2Tank.transform.DORotate(GetRotateByDirection(Constants.Direction.UP), 0.1f);
             OccupyPosition(Player2Position, player2Tank.CurrentTank);
         }
 
